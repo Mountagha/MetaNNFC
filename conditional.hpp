@@ -1,5 +1,5 @@
 
-namespace {
+namespace meta {
     template<bool B, typename T, typename F>
     struct conditional {
         using type = T;
