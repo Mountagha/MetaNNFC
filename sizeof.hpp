@@ -10,4 +10,8 @@ namespace meta {
     template<> struct size_of<void> {
         static_assert("size_of operator does not support void type.");
     };
+
+    template<typename T, size_t N> struct size_equals;
+
+
 }
