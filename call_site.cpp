@@ -8,4 +8,6 @@ int main() {
     std::cout << x << " " << y << "\n";
 
     static_assert(meta::size_of<int>::value == sizeof(int));
+
+    std::cout << meta::size_equals_v<int, 4> << "\n";
 }
