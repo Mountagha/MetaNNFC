@@ -14,4 +14,19 @@ namespace meta {
     template<typename T, std::size_t N> 
     constexpr bool size_equals_v = size_equals<T, N>::value;
 
+    template<typename T>
+    struct nested3 {
+        using type = T;
+    };
+
+    template<typename T>
+    struct nested2 {
+        template<typename U>
+        using type = nested3<U>;
+    };
+
+    template<typename V>
+    struct nested {
+        using type = nested2<V>;
+    };
 }
