@@ -2,6 +2,7 @@
 #include "conditional.hpp"
 #include "sizeof.hpp"
 #include "nested.hpp"
+#include "sub_type.hpp"
 
 int main() {
     meta::conditional_t<true, int, float> x = 3;
@@ -22,6 +23,16 @@ int main() {
 
     // Direct chained use:
     static_assert(meta::Meta1_<2>::type<3>::type<4>::value == 9, "wrong result.");
+
+    // has subtype
+    struct A {
+        using type = int;
+    };
+    struct B {
+
+    };
+    static_assert(meta::has_subtype<A>::value, "A should have subtype");
+    static_assert(meta::has_subtype<B>::value, "B should not have subtype.");
 
     return 0;
 }
