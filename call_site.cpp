@@ -32,7 +32,7 @@ int main() {
 
     };
     static_assert(meta::has_subtype<A>::value, "A should have subtype");
-    static_assert(meta::has_subtype<B>::value, "B should not have subtype.");
+    static_assert(!meta::has_subtype<B>::value, "B should not have subtype.");
 
     return 0;
 }
