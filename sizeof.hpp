@@ -14,4 +14,22 @@ namespace meta {
     template<typename T, std::size_t N> 
     constexpr bool size_equals_v = size_equals<T, N>::value;
 
+    // Input: Array of types
+    // Output: Array of sizeof(type) for each type in types.
+    template<typename... Ts>
+    struct size_type_list {};
+
+    template<std::size_t...values>
+    struct size_values_list {};
+
+    template<typename T>
+    struct sizes_of;
+
+    template<typename... Ts>
+    struct sizes_of<size_type_list<Ts...>> {
+        using type = size_values_list<size_of<Ts>::value...>;
+    };
+
+
+
 }
