@@ -3,6 +3,7 @@
 #include "sizeof.hpp"
 #include "nested.hpp"
 #include "sub_type.hpp"
+#include "short_circuit.hpp"
 
 int main() {
     meta::conditional_t<true, int, float> x = 3;
@@ -33,6 +34,9 @@ int main() {
     };
     static_assert(meta::has_subtype<A>::value, "A should have subtype");
     static_assert(!meta::has_subtype<B>::value, "B should not have subtype.");
+
+    std::cout << meta::allOnes<1, 1, 1>::value << "\n";
+    std::cout << meta::allOnes<1, 0, 1>::value << "\n";
 
     return 0;
 }
