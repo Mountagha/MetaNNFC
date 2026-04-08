@@ -38,5 +38,11 @@ int main() {
     std::cout << meta::allOnes<1, 1, 1>::value << "\n";
     std::cout << meta::allOnes<1, 0, 1>::value << "\n";
 
+    // testing input array, output sizeof(type...)
+    using input = meta::size_type_list<int, char, double>;
+    using expected = meta::size_values_list<sizeof(int), sizeof(char), sizeof(double)>;
+    using actual = meta::sizes_of<input>::type;
+
+    static_assert(std::is_same<actual, expected>::value);
     return 0;
 }

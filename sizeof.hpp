@@ -19,7 +19,7 @@ namespace meta {
     template<typename... Ts>
     struct size_type_list {};
 
-    template<std::size_t...values>
+    template<std::size_t...Vs>
     struct size_values_list {};
 
     template<typename T>
@@ -29,7 +29,5 @@ namespace meta {
     struct sizes_of<size_type_list<Ts...>> {
         using type = size_values_list<size_of<Ts>::value...>;
     };
-
-
 
 }
