@@ -20,6 +20,14 @@ struct VarTypeDict {
 
     template<typename ... TTypes>
     struct Values {
+    public:
+        using Keys = VarTypeDict;
+
+        template<typename TKey>
+        using ValueType = Sequential::At<Values, Sequential::Order<VarTypeDict, TKey>>;
+
+        template<typename TKey>
+        constexpr static bool IsValueEmpty = std::is_same_v<ValueType<TKey>, NullParamter>;
         Values() = default;
 
         Values(std::shared_ptr<void>(&&input)[sizeof...(TTypes)])

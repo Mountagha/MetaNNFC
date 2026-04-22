@@ -3,6 +3,7 @@
 #include <cstddef>
 #include <iterator>
 #include <type_traits>
+#include <utility>
 
 namespace MetaNN {
 template<typename T>
@@ -33,7 +34,7 @@ struct CompileTimeSwitch_;
 
 template<bool curBool, bool... TBools,
         template<typename...> class TFunCont, typename curFunc, typename... TFuncs>
-struct CompileTimeSwitch_<std::integral_sequence<bool, curBool, TBools...>, TFunCont<curFunc, TFuncs...>> {
+struct CompileTimeSwitch_<std::integer_sequence<bool, curBool, TBools...>, TFunCont<curFunc, TFuncs...>> {
     static_assert((sizeof...(TBools) == sizeof...(TFuncs)) ||
                 (sizeof...(TBools) + 1 == sizeof...(TFuncs)));
         using type = typename std::conditional_t<curBool,
@@ -42,12 +43,12 @@ struct CompileTimeSwitch_<std::integral_sequence<bool, curBool, TBools...>, TFun
                                                                     TFunCont<TFuncs...>>>::type;
 };
 
-template<template<typename...> class TFunCont, typename CurFunc>
-struct CompileTimeSwitch_<std::integral_sequence<bool>>, TFunCont<curFunc>> {
+template<template<typename...> class TFunCont, typename curFunc>
+struct CompileTimeSwitch_<std::integer_sequence<bool>, TFunCont<curFunc>> {
     using type = curFunc;
 };
 
 template<typename TBooleanCont, typename TFunCont>
 using CompileTimeSwitch = typename CompileTimeSwitch_<TBooleanCont, TFunCont>::type;
 
-}
+}   // namespace.
